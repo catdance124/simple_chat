@@ -1,21 +1,26 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
   <head>
+    <meta charset="UTF-8">
+    <title>Simple chat</title>
     <link rel="stylesheet" href="css/styles.css">
   </head>
   
   <body>
-    好きにお話ししてください
     <div id="app">
+      <h1>好きにお話ししてください</h1>
       <ul>
         <li v-for="chat in chatLog">{{ chat }}</li>
       </ul>
+
       <div v-if="loading">
-        <img src="./static/Preloader_1.gif" width="16"/>
-        Now Loading...
+        <img class="loading" src="./static/Preloader_1.gif" width="16" alt="gif"/>
+        <span class="loading">Now Loading...</span>
       </div>
+      
       <div v-else>
         <form @submit.prevent="postMessage">
-          <input type="text" v-model="message" required autofocus>
+          <input type="text" v-model="message" required autofocus/>
           <input type="submit" value="post">
         </form>
       </div>

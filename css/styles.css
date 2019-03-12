@@ -3,6 +3,13 @@ body {
   font-family: Verdana, sans-serif;
 }
 
+
+#app h1 {
+  font-size: 16px;
+  border-bottom: 2px solid #ddd;
+  padding: 8px 0;
+}
+
 #app li {
   line-height: 1.5;
 }
@@ -14,4 +21,8 @@ body {
 #app ul {
   padding: 0;
   list-style: none;
+}
+
+#app .loading {
+  vertical-align: middle;
 }

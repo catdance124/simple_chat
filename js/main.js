@@ -13,6 +13,7 @@ function convertDateToString(date, format='YYYY-MM-DD hh:mm:ss') {
   .replace(/ss/g, ('0' + date.getSeconds()).slice(-2));
 }
 
+
 const vm = new Vue({
   el: '#app',
   data: {
@@ -22,7 +23,11 @@ const vm = new Vue({
     chatLog: [],
     loading: false
   },
+  
   mounted: function() {
+    // chatLogが残っていれば読み込む
+    this.chatLog = JSON.parse(localStorage.getItem('chatLog')) || [];
+
     // appIdを取得する
     axios({
       method : 'POST',
@@ -34,6 +39,13 @@ const vm = new Vue({
       }
      }).then(response => (this.appId = response.data.appId));
   },
+
+  watch: {
+    chatLog: function() {
+      localStorage.setItem('chatLog', JSON.stringify(this.chatLog));
+    }
+  },
+
   methods: {
     // メッセージを送信する
     postMessage: function() {
