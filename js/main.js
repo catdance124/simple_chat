@@ -19,7 +19,8 @@ const vm = new Vue({
     appId: '',
     message: '',
     response: '',
-    chatlog: []
+    chatLog: [],
+    loading: false,
   },
   mounted: function() {
     // appIdを取得する
@@ -36,7 +37,8 @@ const vm = new Vue({
   methods: {
     // メッセージを送信する
     postMessage: function() {
-      this.chatlog.push('あなた:\t'+this.message);
+      this.chatLog.push('あなた:\t'+this.message);
+      this.loading = true;
       axios({
         method : 'POST',
         url    : chat_URL,
@@ -50,8 +52,9 @@ const vm = new Vue({
         },
         headers: {'Content-Type': 'application/json;charset=UTF-8'}
        }).then(response => {
+         this.loading = false;
          this.response = response.data.systemText.expression;
-         this.chatlog.push('AI:\t'+this.response);
+         this.chatLog.push('AI:\t'+this.response);
        });
       this.message = '';
     }
