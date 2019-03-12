@@ -1,7 +1,6 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/loading.css">
   </head>
   
   <body>
@@ -11,7 +10,7 @@
         <li v-for="chat in chatLog">{{ chat }}</li>
       </ul>
       <div v-if="loading">
-        <img src="./static/Preloader_1.gif" width="15"/>
+        <img src="./static/Preloader_1.gif" width="16"/>
         Now Loading...
       </div>
       <div v-else>

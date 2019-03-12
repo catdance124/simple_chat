@@ -20,28 +20,29 @@ const vm = new Vue({
     message: '',
     response: '',
     chatLog: [],
-    loading: false,
+    loading: false
   },
   mounted: function() {
     // appIdを取得する
     axios({
       method : 'POST',
       url    : regist_URL,
+      headers: {'Content-Type': 'application/json;charset=UTF-8'},
       data   : {
         botId : 'Chatting',
         appKind : 'Typing'  // サービス毎に定義するアプリ種別（任意の値）
-      },
-      headers: {'Content-Type': 'application/json;charset=UTF-8'}
+      }
      }).then(response => (this.appId = response.data.appId));
   },
   methods: {
     // メッセージを送信する
     postMessage: function() {
-      this.chatLog.push('あなた:\t'+this.message);
+      this.chatLog.push('あなた:\t' + this.message);
       this.loading = true;
       axios({
         method : 'POST',
         url    : chat_URL,
+        headers: {'Content-Type': 'application/json;charset=UTF-8'},
         data   : {
           language: "ja-JP",
           botId : 'Chatting',
@@ -49,12 +50,11 @@ const vm = new Vue({
           voiceText: this.message,
           appRecvTime: convertDateToString( new Date() ),
           appSendTime: convertDateToString( new Date() )
-        },
-        headers: {'Content-Type': 'application/json;charset=UTF-8'}
+        }
        }).then(response => {
          this.loading = false;
          this.response = response.data.systemText.expression;
-         this.chatLog.push('AI:\t'+this.response);
+         this.chatLog.push('AI:\t' + this.response);
        });
       this.message = '';
     }
